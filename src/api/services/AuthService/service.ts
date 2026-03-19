@@ -11,10 +11,6 @@ export default class AuthService {
       headers: { "Content-Type": "application/json" }
     });
 
-    if (!response.success) {
-      throw new Error(response.error || 'Login failed');
-    }
-
     return response;
   };
 
@@ -25,10 +21,6 @@ export default class AuthService {
       data: data,
       headers: { "Content-Type": "application/json" }
     });
-
-    if (!response.success) {
-      throw new Error(response.error || 'Registration failed');
-    }
 
     return response;
   }

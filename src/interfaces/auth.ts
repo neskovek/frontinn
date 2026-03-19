@@ -13,7 +13,7 @@ export interface AuthRegisterBody {
 }
 
 export interface AuthLoginResponse {
-    acess_token: string;
+    access_token: string;
     user: User;
 }
 

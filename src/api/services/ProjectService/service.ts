@@ -15,8 +15,8 @@ export default class ProjectService {
                 method: "GET",
                 headers: { "Content-Type": "application/json" }
             });
-    
-            return response?.data || { data: [], count: 0, success: true };
+
+            return response.result;
         } catch (error) {
             console.error("Error fetching projects:", error);
             throw error;
@@ -31,7 +31,7 @@ export default class ProjectService {
                 headers: { "Content-Type": "application/json" }
             });
 
-            return response?.data || { data: {}, success: true };
+            return response;
         } catch (error) {
             console.error("Error fetching users:", error);
             throw error;
