@@ -10,7 +10,7 @@ const USER_KEY = '@frontinn:user';
 interface AuthContextData {
   user: User | null;
   token: string | null;
-  role: 'admin' | 'hero' | null;
+  role: 'admin' | 'hero';
   isAuthenticated: boolean;
   signIn: (response: AuthLoginResponse) => void;
   signOut: () => void;
@@ -52,7 +52,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setUser(null);
   }, []);
 
-  const role = token ? (decodeToken(token)?.role ?? null) : null;
+  const role = token ? (decodeToken(token)?.role ?? 'hero') : 'hero';
 
   return (
     <AuthContext.Provider

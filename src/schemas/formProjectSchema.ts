@@ -10,6 +10,7 @@ export const formCreateProjectSchema = z.object({
   description: z.string().optional(),
   status: z.enum(['pending', 'in_progress', 'done']),
   goals: z.array(goalSchema).optional(),
+  userId: z.string().min(1, 'Selecione um usuário responsável'),
 });
 
 export const formUpdateProjectSchema = formCreateProjectSchema.partial();

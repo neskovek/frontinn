@@ -16,6 +16,15 @@ export default function Sidebar() {
     { name: 'Usuários', href: '/users', icon: Users, adminOnly: true },
   ].filter(item => !item.adminOnly || role === 'admin');
 
+  function formatRole(role: 'admin' | 'hero') {
+    const roleMap: Record<string, string> = {
+      admin: 'Administrador',
+      hero: 'Herói'
+    };
+
+    return roleMap[role] || role;
+  };
+
   return (
     <>
       <aside
@@ -50,7 +59,7 @@ export default function Sidebar() {
             {!collapsed && (
               <div className="flex flex-col items-start min-w-0 overflow-hidden w-full">
                 <p>{user?.name}</p>
-                <p className="text-xs text-neutral-500 truncate w-full">
+                <p className="text-xs text-neutral-500 truncate">
                   {user?.email}
                 </p>
                 <p className="text-xs text-neutral-500">
@@ -106,7 +115,7 @@ export default function Sidebar() {
             <div className="flex flex-col gap-2 text-sm text-neutral-400">
               <div className="flex justify-between">
                 <span>Função</span>
-                <span className="capitalize text-neutral-200">{role ?? '—'}</span>
+                <span className="capitalize text-neutral-200">{formatRole(role) ?? '—'}</span>
               </div>
             </div>
 
