@@ -3,11 +3,10 @@ import request from "../../request";
 import { ProjectEndpoints } from "./config";
 
 export default class ProjectService {
-    public static get = async (searchText?: string) => {
+    public static get = async (filters?: { userId?: string; status?: string }) => {
         const params = new URLSearchParams();
-        if (searchText && searchText.trim() !== '') {
-            params.append('search', searchText.trim());
-        }
+        if (filters?.userId) params.append('userId', filters.userId);
+        if (filters?.status) params.append('status', filters.status);
     
         try {
             const response = await request({
