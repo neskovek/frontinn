@@ -2,10 +2,10 @@ import { useQuery } from "@tanstack/react-query";
 import ProjectService from "./service";
 import type { Project } from "#/interfaces/project";
 
-export const useGetProjectsQuery = (searchText?: string) => {
+export const useGetProjectsQuery = (filters?: { userId?: string; status?: string }) => {
     return useQuery<Project[], Error>({
-        queryKey: ['getProjects', searchText],
-        queryFn: () => ProjectService.get(searchText)
+        queryKey: ['getProjects', filters],
+        queryFn: () => ProjectService.get(filters)
     });
 };
 
