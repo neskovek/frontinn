@@ -50,5 +50,3 @@ docker run -p 8080:80 frontinn
 ```
 
 A aplicação estará disponível em `http://localhost:8080`.
-
-> A URL da API é injetada em tempo de build via `--build-arg`. Para apontar para outro ambiente, altere o valor de `VITE_API_URL`.
