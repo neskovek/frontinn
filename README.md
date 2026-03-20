@@ -1,6 +1,6 @@
 # Frontinn
 
-Frontend de um sistema de gerenciamento de projetos e usuários com controle de acesso baseado em perfis (admin/hero).
+Frontend do portal **HeroForce** — sistema de gestão e vendas de projetos heroicos. Construído com React.js.
 
 ## O que o projeto faz
 
@@ -50,3 +50,29 @@ docker run -p 8080:80 frontinn
 ```
 
 A aplicação estará disponível em `http://localhost:8080`.
+
+## Decisões técnicas
+
+### TanStack Router
+
+O TanStack Router foi escolhido por oferecer uma forma mais simples e prática de criar rotas, via páginas, além de ter suporte a SSR sem depender de um framework estilo Next. Além disso, o router possui suporte nativo a nested layouts, o que permitiu isolar as rotas autenticadas num único layout `_authenticated` que intercepta o acesso e redireciona para `/login` quando necessário.
+
+### TanStack Query
+
+O TanStack Query gerencia todo o ciclo de vida das requisições: cache, revalidação, estados de loading/error e sincronização entre componentes. A decisão de usá-lo evitou a necessidade de criar stores globais (Zustand, Redux) apenas para compartilhar dados entre componentes, além de simplificar as chamadas para a API.
+
+### React Hook Form + Zod
+
+Formulários são validados com Zod no próprio schema e integrados ao React Hook Form via `zodResolver`, garantindo que a tipagem TypeScript e as regras de validação sejam a mesma.
+
+### Controle de acesso por perfil
+
+O papel do usuário (`admin` / `hero`) é lido do token JWT via hook `useAuth` e propagado para os componentes.
+
+## Possíveis melhorias
+
+- **Filtros na tela de usuários** — atualmente a listagem de usuários não possui filtros. Seria interessante adicionar busca por nome, filtro por perfil (admin/hero) e por personagem, seguindo o mesmo padrão do `FormFilter` já implementado na dashboard.
+
+- **Upload de foto de perfil** — cada usuário poderia ter uma foto de perfil. Uma boa abordagem seria integrar com o Google Cloud Storage (GCS), fazendo upload direto do browser via signed URL gerada pelo backend, e armazenando apenas a URL pública no banco de dados.
+
+- **Dashboard mais rico** — a tela de projetos poderia evoluir para um dashboard mais analítico, com cards de resumo (total de projetos por status), gráficos de distribuição (pizza ou barras), e uma visão de linha do tempo das metas. Atualmente a listagem mostra os dados tabulares mas não oferece uma visão agregada do estado geral dos projetos.
